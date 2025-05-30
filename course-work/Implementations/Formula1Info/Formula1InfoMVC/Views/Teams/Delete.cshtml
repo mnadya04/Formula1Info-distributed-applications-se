@@ -1,0 +1,15 @@
+﻿@model Formula1InfoMVC.ViewModels.Team.TeamFormViewModel
+
+@{
+    ViewData["Title"] = "Delete Team";
+}
+
+<h1>Delete Team</h1>
+
+<h4>Are you sure you want to delete <strong>@Model.Name</strong>?</h4>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="TeamId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

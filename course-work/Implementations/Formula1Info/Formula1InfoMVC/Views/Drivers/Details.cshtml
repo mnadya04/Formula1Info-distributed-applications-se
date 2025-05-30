@@ -1,0 +1,34 @@
+﻿@model Formula1InfoMVC.ViewModels.Driver.DriverFormViewModel
+
+@{
+    ViewData["Title"] = "Driver Details";
+}
+
+<h1>Driver Details</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Full Name</dt>
+        <dd class="col-sm-10">@Model.FirstName @Model.LastName</dd>
+
+        <dt class="col-sm-2">Nationality</dt>
+        <dd class="col-sm-10">@Model.Nationality</dd>
+
+        <dt class="col-sm-2">Unique Number</dt>
+        <dd class="col-sm-10">@Model.UniqueNumber</dd>
+
+        <dt class="col-sm-2">Championships</dt>
+        <dd class="col-sm-10">@Model.NumberOfChampionships</dd>
+
+        <dt class="col-sm-2">Date of Birth</dt>
+        <dd class="col-sm-10">@Model.DateOfBirth.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Image</dt>
+        <dd class="col-sm-10">
+            <img src="@Model.DriverImageUrl" alt="Driver Image" class="img-thumbnail" style="max-width: 200px;" />
+        </dd>
+    </dl>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.DriverId" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>

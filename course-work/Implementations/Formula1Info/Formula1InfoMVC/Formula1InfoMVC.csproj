@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ViewModels\Driver\" />
+    <None Remove="ViewModels\Race\" />
+    <None Remove="ViewModels\Team\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Interfaces\" />
+    <None Remove="ViewModels\Helpers\" />
+    <None Remove="Views\Drivers\" />
+    <None Remove="Views\Teams\" />
+    <None Remove="Views\Account\" />
+    <None Remove="ViewModels\Account\" />
+    <None Remove="Views\Races\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Driver\" />
+    <Folder Include="ViewModels\Race\" />
+    <Folder Include="ViewModels\Team\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="ViewModels\Helpers\" />
+    <Folder Include="Views\Drivers\" />
+    <Folder Include="Views\Teams\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="ViewModels\Account\" />
+    <Folder Include="Views\Races\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Security.Permissions" Version="9.0.5" />
+  </ItemGroup>
+</Project>

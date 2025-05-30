@@ -1,0 +1,51 @@
+﻿@model Formula1InfoMVC.ViewModels.Race.RaceFormViewModel
+
+@{
+    ViewData["Title"] = "Race Details";
+}
+
+<h1>Race Details</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">Name:</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Location:</dt>
+            <dd class="col-sm-9">@Model.Location</dd>
+
+            <dt class="col-sm-3">Date:</dt>
+            <dd class="col-sm-9">@Model.Date.ToShortDateString()</dd>
+
+            <dt class="col-sm-3">Laps:</dt>
+            <dd class="col-sm-9">@Model.Laps</dd>
+
+            <dt class="col-sm-3">Circuit URL:</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrWhiteSpace(Model.CircuitUrl))
+                {
+                    <a href="@Model.CircuitUrl" target="_blank">View circuit</a>
+                }
+                else
+                {
+                    <span class="text-muted">No URL provided</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Driver:</dt>
+            <dd class="col-sm-9">
+                @(Model.Drivers?.FirstOrDefault(d => d.Value == Model.DriverId)?.Text ?? "Unknown")
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.RaceId" class="btn btn-primary">Edit</a>
+    }
+</p>

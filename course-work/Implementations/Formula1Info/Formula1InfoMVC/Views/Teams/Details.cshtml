@@ -1,0 +1,32 @@
+﻿@model Formula1InfoMVC.ViewModels.Team.TeamFormViewModel
+
+@{
+    ViewData["Title"] = "Team Details";
+}
+
+<h1>Team Details</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Base Country</dt>
+    <dd class="col-sm-10">@Model.BaseCountry</dd>
+
+    <dt class="col-sm-2">Founded</dt>
+    <dd class="col-sm-10">@Model.FounderYear</dd>
+
+    <dt class="col-sm-2">Budget</dt>
+    <dd class="col-sm-10">@Model.Budget.ToString("C")</dd>
+
+    <dt class="col-sm-2">Description</dt>
+    <dd class="col-sm-10">@Model.Description</dd>
+
+    <dt class="col-sm-2">Image</dt>
+    <dd class="col-sm-10">
+        <img src="@Model.ImageUrl" alt="Team Logo" class="img-thumbnail" style="max-width: 200px;" />
+    </dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.TeamId" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>

@@ -1,0 +1,50 @@
+﻿@model Formula1InfoMVC.ViewModels.Team.TeamFormViewModel
+
+@{
+    ViewData["Title"] = "Create Team";
+}
+
+<h1>Create Team</h1>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BaseCountry"></label>
+        <input asp-for="BaseCountry" class="form-control" />
+        <span asp-validation-for="BaseCountry" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FounderYear"></label>
+        <input asp-for="FounderYear" class="form-control" />
+        <span asp-validation-for="FounderYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Budget"></label>
+        <input asp-for="Budget" class="form-control" />
+        <span asp-validation-for="Budget" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl"></label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

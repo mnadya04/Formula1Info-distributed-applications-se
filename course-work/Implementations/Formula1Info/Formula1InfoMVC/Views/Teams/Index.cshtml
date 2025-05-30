@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Formula1InfoMVC.ViewModels.Team.TeamViewModel>
+
+@{
+    ViewData["Title"] = "Teams";
+    string searchName = ViewBag.SearchName as string ?? "";
+    string searchCountry = ViewBag.SearchCountry as string ?? "";
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+    int itemsPerPage = ViewBag.ItemsPerPage ?? 10;
+}
+
+<h1>Teams</h1>
+
+<form method="get" class="row mb-4">
+    <div class="col-md-4">
+        <input type="text" name="searchName" value="@searchName" class="form-control" placeholder="Search by name" />
+    </div>
+    <div class="col-md-4">
+        <input type="text" name="searchCountry" value="@searchCountry" class="form-control" placeholder="Search by country" />
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+</form>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </p>
+}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Name</th>
+            <th>Base Country</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="3" class="text-center">No teams found.</td></tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.BaseCountry</td>
+                    <td class="text-end">
+                        <a asp-action="Details" asp-route-id="@item.TeamId" class="btn btn-outline-info btn-sm">Details</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.TeamId" class="btn btn-outline-warning btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.TeamId" class="btn btn-outline-danger btn-sm">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (totalPages > 1)
+{
+    <nav aria-label="Team pagination">
+        <ul class="pagination">
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == currentPage ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@i"
+                       asp-route-searchName="@searchName"
+                       asp-route-searchCountry="@searchCountry"
+                       asp-route-itemsPerPage="@itemsPerPage">
+                        @i
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

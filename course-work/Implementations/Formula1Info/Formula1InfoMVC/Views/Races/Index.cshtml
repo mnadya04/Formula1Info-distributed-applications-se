@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Formula1InfoMVC.ViewModels.Race.RaceViewModel>
+
+@{
+    ViewData["Title"] = "Races";
+
+    var searchName = ViewBag.SearchName as string ?? "";
+    var isFuture = ViewBag.IsFuture as string ?? "";
+    var currentPage = (int)(ViewBag.CurrentPage ?? 1);
+    var totalPages = (int)(ViewBag.TotalPages ?? 1);
+}
+
+<h1>Races</h1>
+
+<form method="get" class="row mb-4">
+    <div class="col-md-4">
+        <input type="text" name="name" value="@searchName" class="form-control" placeholder="Search by name" />
+    </div>
+    <div class="col-md-4">
+        <select name="isFuture" class="form-control">
+            <option value="">All</option>
+            <option value="true" selected="@(isFuture == "true" ? "selected" : null)">Upcoming</option>
+            <option value="false" selected="@(isFuture == "false" ? "selected" : null)">Past</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+</form>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success">Create New Race</a>
+    </p>
+}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center">No races found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Location</td>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td class="text-end">
+                        <a asp-action="Details" asp-route-id="@item.RaceId" class="btn btn-outline-info btn-sm">Details</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.RaceId" class="btn btn-outline-warning btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@item.RaceId" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<nav aria-label="Race pagination">
+    <ul class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@i"
+                   asp-route-name="@searchName"
+                   asp-route-isFuture="@isFuture">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
