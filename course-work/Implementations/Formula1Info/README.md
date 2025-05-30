@@ -29,11 +29,11 @@ Formula1InfoMVC е уеб приложение, което предоставя 
 ### 2. Стъпки за инсталация
 
 1. **Клонирай проекта или изтегли**  
-   
-   git clone https://github.com/yourusername/Formula1InfoMVC.git
+
+git clone https://github.com/yourusername/Formula1InfoMVC.git
 
 
-2. **Обнови connection string. Конфигурирай връзката към базата
+3. **Обнови connection string. Конфигурирай връзката към базата
 Във appsettings.json на проекта Formula1Info**
 
 "ConnectionStrings": {
